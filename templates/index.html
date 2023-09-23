@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+<h2>НАШ АВТОПАРК</h2>
+<div>
+<form action="create/" method="POST">
+    {% csrf_token %}
+    {{ forma }}
+    <input type="submit" value="ДОБАВИТЬ">
+</form>
+
+    <table>
+        <tr><td>Номер</td><td>Марка</td><td>Производитель</td><td>Возраст</td><td>Гос.номер</td></tr>
+        {% for one in avtobasa %}
+            <tr>
+                <td>{{ one.id }}</td>
+                <td>{{ one.marka }}</td>
+                <td>{{ one.zavod }}</td>
+                <td>{{ one.year }}</td>
+                <td>{{ one.nomer }}</td>
+                <td><a href="{% url 'del' one.id %}">УДАЛИТЬ</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
